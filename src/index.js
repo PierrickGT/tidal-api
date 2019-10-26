@@ -3,7 +3,6 @@ import qs from 'querystring';
 
 /** Class */
 class Tidal {
-
   /**
    *
    * @param {object} [options] - Tidal options (optional)
@@ -43,7 +42,6 @@ class Tidal {
   * @reject {Error}
   */
   async login(username, password) {
-
     if (!username || !password) {
       throw new Error('Username and password are required arguments of login()');
     }
@@ -89,7 +87,6 @@ class Tidal {
   * @reject {Error}
   */
   async search(query, type, limit = 25) {
-
     const accTypes = ['artists', 'albums', 'tracks', 'playlists'];
 
     if (!type) {
@@ -157,7 +154,6 @@ class Tidal {
   * @reject {Error}
   */
   async getTrack(id) {
-
     const res = await this.api({
       method: 'GET',
       url: `/tracks/${id}?${this.params}`,
@@ -167,16 +163,15 @@ class Tidal {
   }
 
   /**
-  * get your favorite (starred) tracks (requires login() to be called)
-  * @example tidal.getFavoriteTracks()
-  * @returns {Promise}
-  * @fulfil {Array} - an array of track objects
-  * @reject {Error}
-  * @see {@link Tidal#login} - login method must be called first
-  * @see {@link Tidal#getTrack} - track object example
-  */
+   * get your favorite (starred) tracks (requires login() to be called)
+   * @example tidal.getFavoriteTracks()
+   * @returns {Promise}
+   * @fulfil {Array} - an array of track objects
+   * @reject {Error}
+   * @see {@link Tidal#login} - login method must be called first
+   * @see {@link Tidal#getTrack} - track object example
+   */
   async getFavoriteTracks() {
-
     if (!this.userId || !this.sessionId) {
       throw new Error('You must call the login method first');
     }
@@ -241,7 +236,6 @@ class Tidal {
   * @reject {Error}
   */
   async getAlbum(id) {
-
     const res = await this.api({
       method: 'GET',
       url: `/albums/${id}?${this.params}`,
@@ -251,16 +245,15 @@ class Tidal {
   }
 
   /**
-  * get album tracks by album id
-  * @param {number} id - album id
-  * @example tidal.getAlbumTracks(80216363)
-  * @returns {Promise}
-  * @fulfil {Array} - an array of track objects
-  * @reject {Error}
-  * @see {@link Tidal#getTrack} - track object example
-  */
+   * get album tracks by album id
+   * @param {number} id - album id
+   * @example tidal.getAlbumTracks(80216363)
+   * @returns {Promise}
+   * @fulfil {Array} - an array of track objects
+   * @reject {Error}
+   * @see {@link Tidal#getTrack} - track object example
+   */
   async getAlbumTracks(id) {
-
     const res = await this.api({
       method: 'GET',
       url: `/albums/${id}/tracks?${this.params}`,
@@ -271,7 +264,6 @@ class Tidal {
 
   // this is an internal method and so won't be included in JSDOC
   async getFeaturedAlbums() {
-
     const res = await this.api({
       method: 'GET',
       url: `/pages/show_more_featured_albums?${this.localeParams}`,
@@ -291,61 +283,57 @@ class Tidal {
   }
 
   /**
-  * get top 20 albums on Tidal
-  * @example tidal.getTopAlbums()
-  * @returns {Promise}
-  * @fulfil {Array} - an array of album objects
-  * @reject {Error}
-  * @see {@link Tidal#getAlbum} - album object example
-  */
+   * get top 20 albums on Tidal
+   * @example tidal.getTopAlbums()
+   * @returns {Promise}
+   * @fulfil {Array} - an array of album objects
+   * @reject {Error}
+   * @see {@link Tidal#getAlbum} - album object example
+   */
   async getTopAlbums() {
-
     const featuredAlbums = await this.getFeaturedAlbums();
 
     return featuredAlbums.topAlbums;
   }
 
   /**
-  * get new albums on Tidal
-  * @example tidal.getNewAlbums()
-  * @returns {Promise}
-  * @fulfil {Array} - an array of album objects
-  * @reject {Error}
-  * @see {@link Tidal#getAlbum} - album object example
-  */
+   * get new albums on Tidal
+   * @example tidal.getNewAlbums()
+   * @returns {Promise}
+   * @fulfil {Array} - an array of album objects
+   * @reject {Error}
+   * @see {@link Tidal#getAlbum} - album object example
+   */
   async getNewAlbums() {
-
     const featuredAlbums = await this.getFeaturedAlbums();
 
     return featuredAlbums.newAlbums;
   }
 
   /**
-  * get staff pick albums on Tidal
-  * @example tidal.getStaffPickAlbums()
-  * @returns {Promise}
-  * @fulfil {Array} - an array of album objects
-  * @reject {Error}
-  * @see {@link Tidal#getAlbum} - album object example
-  */
+   * get staff pick albums on Tidal
+   * @example tidal.getStaffPickAlbums()
+   * @returns {Promise}
+   * @fulfil {Array} - an array of album objects
+   * @reject {Error}
+   * @see {@link Tidal#getAlbum} - album object example
+   */
   async getStaffPickAlbums() {
-
     const featuredAlbums = await this.getFeaturedAlbums();
 
     return featuredAlbums.staffPicks;
   }
 
   /**
-  * get your favorite (starred) albums (requires login() to be called)
-  * @example tidal.getFavoriteAlbums()
-  * @returns {Promise}
-  * @fulfil {Array} - an array of album objects
-  * @reject {Error}
-  * @see {@link Tidal#login} - login method must be called first
-  * @see {@link Tidal#getAlbum} - album object example
-  */
+   * get your favorite (starred) albums (requires login() to be called)
+   * @example tidal.getFavoriteAlbums()
+   * @returns {Promise}
+   * @fulfil {Array} - an array of album objects
+   * @reject {Error}
+   * @see {@link Tidal#login} - login method must be called first
+   * @see {@link Tidal#getAlbum} - album object example
+   */
   async getFavoriteAlbums() {
-
     if (!this.userId || !this.sessionId) {
       throw new Error('You must call the login method first');
     }
@@ -379,7 +367,6 @@ class Tidal {
   * @reject {Error}
   */
   async getArtist(id) {
-
     const res = await this.api({
       method: 'GET',
       url: `/artists/${id}?${this.params}`,
@@ -389,16 +376,15 @@ class Tidal {
   }
 
   /**
-  * get artist albums by artist id
-  * @param {number} id - artist id
-  * @example tidal.getArtistAlbums(3575680)
-  * @returns {Promise}
-  * @fulfil {Array} - an array of album objects
-  * @reject {Error}
-  * @see {@link Tidal#getAlbum} - album object example
-  */
+   * get artist albums by artist id
+   * @param {number} id - artist id
+   * @example tidal.getArtistAlbums(3575680)
+   * @returns {Promise}
+   * @fulfil {Array} - an array of album objects
+   * @reject {Error}
+   * @see {@link Tidal#getAlbum} - album object example
+   */
   async getArtistAlbums(id) {
-
     const res = await this.api({
       method: 'GET',
       url: `/artists/${id}/albums?${this.params}`,
@@ -408,16 +394,15 @@ class Tidal {
   }
 
   /**
-  * get artist EPs and singles by artist id
-  * @param {number} id - artist id
-  * @example tidal.getArtistEPsAndSingles(3575680)
-  * @returns {Promise}
-  * @fulfil {Array} - an array of album objects
-  * @reject {Error}
-  * @see {@link Tidal#getAlbum} - album object example
-  */
+   * get artist EPs and singles by artist id
+   * @param {number} id - artist id
+   * @example tidal.getArtistEPsAndSingles(3575680)
+   * @returns {Promise}
+   * @fulfil {Array} - an array of album objects
+   * @reject {Error}
+   * @see {@link Tidal#getAlbum} - album object example
+   */
   async getArtistEPsAndSingles(id) {
-
     const res = await this.api({
       method: 'GET',
       url: `/artists/${id}/albums?${this.params}`,
@@ -427,16 +412,15 @@ class Tidal {
   }
 
   /**
-  * get compliations that artist has appeared on by artist id
-  * @param {number} id - artist id
-  * @example tidal.getArtistCompilations(3575680)
-  * @returns {Promise}
-  * @fulfil {Array} - an array of album objects
-  * @reject {Error}
-  * @see {@link Tidal#getAlbum} - album object example
-  */
+   * get compliations that artist has appeared on by artist id
+   * @param {number} id - artist id
+   * @example tidal.getArtistCompilations(3575680)
+   * @returns {Promise}
+   * @fulfil {Array} - an array of album objects
+   * @reject {Error}
+   * @see {@link Tidal#getAlbum} - album object example
+   */
   async getArtistCompilations(id) {
-
     const res = await this.api({
       method: 'GET',
       url: `/artists/${id}/albums?${this.params}&filter=COMPILATIONS`,
@@ -446,17 +430,16 @@ class Tidal {
   }
 
   /**
-  * get top tracks by artist
-  * @param {number} id - artist id
-  * @param {number} [limit] - results limit
-  * @example tidal.getArtistTopTracks(3575680)
-  * @returns {Promise}
-  * @fulfil {Array} - an array of track objects
-  * @reject {Error}
-  * @see {@link Tidal#getTrack} - track object example
-  */
+   * get top tracks by artist
+   * @param {number} id - artist id
+   * @param {number} [limit] - results limit
+   * @example tidal.getArtistTopTracks(3575680)
+   * @returns {Promise}
+   * @fulfil {Array} - an array of track objects
+   * @reject {Error}
+   * @see {@link Tidal#getTrack} - track object example
+   */
   async getArtistTopTracks(id, limit = 10) {
-
     const res = await this.api({
       method: 'GET',
       url: `/artists/${id}/toptracks?limit=${limit}&countryCode=${this.countryCode}`,
@@ -466,14 +449,14 @@ class Tidal {
   }
 
   /**
-  * get similar artists
-  * @param {number} id - artist id
-  * @example tidal.getSimilarArtists(3575680)
-  * @returns {Promise}
-  * @fulfil {Object} - artist object
-  * @reject {Error}
-  * @see {@link Tidal#getArtist} - artist object example
-  */
+   * get similar artists
+   * @param {number} id - artist id
+   * @example tidal.getSimilarArtists(3575680)
+   * @returns {Promise}
+   * @fulfil {Object} - artist object
+   * @reject {Error}
+   * @see {@link Tidal#getArtist} - artist object example
+   */
   async getSimilarArtists(id) {
     const res = await this.api({
       method: 'GET',
@@ -484,16 +467,15 @@ class Tidal {
   }
 
   /**
-  * get your favorite (starred) artists (requires login() to be called)
-  * @example tidal.getFavoriteArtists()
-  * @returns {Promise}
-  * @fulfil {Array} - an array of artist objects
-  * @reject {Error}
-  * @see {@link Tidal#login} - login method must be called first
-  * @see {@link Tidal#getArtist} - artist object example
-  */
+   * get your favorite (starred) artists (requires login() to be called)
+   * @example tidal.getFavoriteArtists()
+   * @returns {Promise}
+   * @fulfil {Array} - an array of artist objects
+   * @reject {Error}
+   * @see {@link Tidal#login} - login method must be called first
+   * @see {@link Tidal#getArtist} - artist object example
+   */
   async getFavoriteArtists() {
-
     if (!this.userId || !this.sessionId) {
       throw new Error('You must call the login method first');
     }
@@ -508,6 +490,51 @@ class Tidal {
     const artists = items.map(item => item.item);
 
     return artists;
+  }
+
+  /**
+   * post your favorite (starred) artists (requires login() to be called)
+   * @param {string} artistIds - one or several artists id
+   * @example tidal.postFavoriteArtist('3575680,7506421')
+   * @returns {Promise}
+   * @fulfil {Response} - response object
+   * @reject {Error} - error object
+   * @see {@link Tidal#login} - login method must be called first
+   */
+  async postFavoriteArtists(artistIds) {
+    if (!this.userId || !this.sessionId) {
+      throw new Error('You must call the login method first');
+    }
+
+    const res = await this.api({
+      method: 'POST',
+      url: `/users/${this.userId}/favorites/artists?${this.params}`,
+      data: qs.stringify({ artistIds }),
+    });
+
+    return res;
+  }
+
+  /**
+   * delete your favorite (starred) artist (requires login() to be called)
+   * @param {number} artistId - artist id
+   * @example tidal.deleteFavoriteArtist(3575680)
+   * @returns {Promise}
+   * @fulfil {Response} - response object
+   * @reject {Error} - error object
+   * @see {@link Tidal#login} - login method must be called first
+   */
+  async deleteFavoriteArtist(artistId) {
+    if (!this.userId || !this.sessionId) {
+      throw new Error('You must call the login method first');
+    }
+
+    const res = await this.api({
+      method: 'DELETE',
+      url: `/users/${this.userId}/favorites/artists/${artistId}/?${this.params}`,
+    });
+
+    return res;
   }
 
   /**
@@ -544,7 +571,6 @@ class Tidal {
   * @reject {Error}
   */
   async getPlaylist(uuid) {
-
     const res = await this.api({
       method: 'GET',
       url: `/playlists/${uuid}?${this.params}`,
@@ -554,16 +580,15 @@ class Tidal {
   }
 
   /**
-  * get playlist tracks by playlist uuid
-  * @param {string} uuid - playlist uuid
-  * @example tidal.getPlaylistTracks('1c5d01ed-4f05-40c4-bd28-0f73099e9648')
-  * @returns {Promise}
-  * @fulfil {Array} - an array of track objects
-  * @reject {Error}
-  * @see {@link Tidal#getTrack} - track object example
-  */
+   * get playlist tracks by playlist uuid
+   * @param {string} uuid - playlist uuid
+   * @example tidal.getPlaylistTracks('1c5d01ed-4f05-40c4-bd28-0f73099e9648')
+   * @returns {Promise}
+   * @fulfil {Array} - an array of track objects
+   * @reject {Error}
+   * @see {@link Tidal#getTrack} - track object example
+   */
   async getPlaylistTracks(uuid) {
-
     const res = await this.api({
       method: 'GET',
       url: `/playlists/${uuid}/tracks?${this.params}`,
@@ -573,16 +598,15 @@ class Tidal {
   }
 
   /**
-  * get your favorite (starred) playlists (requires login() to be called)
-  * @example tidal.getFavoritePlaylists()
-  * @returns {Promise}
-  * @fulfil {Array} - an array of playlist objects
-  * @reject {Error}
-  * @see {@link Tidal#login} - login method must be called first
-  * @see {@link Tidal#getPlaylist} - playlist object example
-  */
+   * get your favorite (starred) playlists (requires login() to be called)
+   * @example tidal.getFavoritePlaylists()
+   * @returns {Promise}
+   * @fulfil {Array} - an array of playlist objects
+   * @reject {Error}
+   * @see {@link Tidal#login} - login method must be called first
+   * @see {@link Tidal#getPlaylist} - playlist object example
+   */
   async getFavoritePlaylists() {
-
     if (!this.userId || !this.sessionId) {
       throw new Error('You must call the login method first');
     }
@@ -600,16 +624,15 @@ class Tidal {
   }
 
   /**
-  * get your created playlists (requires login() to be called)
-  * @example tidal.getPlaylists()
-  * @returns {Promise}
-  * @fulfil {Array} - an array of playlist objects
-  * @reject {Error}
-  * @see {@link Tidal#login} - login method must be called first
-  * @see {@link Tidal#getPlaylist} - playlist object example
-  */
+   * get your created playlists (requires login() to be called)
+   * @example tidal.getPlaylists()
+   * @returns {Promise}
+   * @fulfil {Array} - an array of playlist objects
+   * @reject {Error}
+   * @see {@link Tidal#login} - login method must be called first
+   * @see {@link Tidal#getPlaylist} - playlist object example
+   */
   async getPlaylists() {
-
     if (!this.userId || !this.sessionId) {
       throw new Error('You must call the login method first');
     }
@@ -665,7 +688,6 @@ class Tidal {
       xl: `${baseUrl}/1280x1280.jpg`,
     };
   }
-
 }
 
 export default Tidal;
